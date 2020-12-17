@@ -26,8 +26,11 @@ class PokemonTableViewCell: UITableViewCell {
         
 //        let pokemonCount = ViewController()
 //        let pokeCount = pokemonCount.pokemonArray.count
-            self.typeLabel.text = pokemonType[0].name
-        
+        DispatchQueue.main.async {
+            self.typeLabel.text = self.pokemonType[0].name
+            let vc = ViewController()
+            vc.pokemonTableView?.reloadData()
+        }
         NetworkManager.shared.getImageData(from: (pokemon.sprites.frontDefault)!) { (data, error) in
             guard let data = data else {return}
             DispatchQueue.main.async {
